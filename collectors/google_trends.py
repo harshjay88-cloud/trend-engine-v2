@@ -1,17 +1,11 @@
-import requests
+from pytrends.request import TrendReq
 
-def get_trending_videos():
+pytrend = TrendReq()
 
-    url = "https://www.googleapis.com/youtube/v3/videos"
+def get_trends(keyword):
 
-    params = {
-        "part": "snippet,statistics",
-        "chart": "mostPopular",
-        "regionCode": "US",
-        "maxResults": 25,
-        "key": "YOUR_API_KEY"
-    }
+    pytrend.build_payload([keyword])
 
-    r = requests.get(url,params=params)
+    data = pytrend.interest_over_time()
 
-    return r.json()
+    return data
